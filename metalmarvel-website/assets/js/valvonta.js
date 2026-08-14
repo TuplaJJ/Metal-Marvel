@@ -3,7 +3,7 @@
 import { initI18n } from './i18n.js';
 import { initNav, initReveal } from './ui.js';
 import { initGlobe } from './globe.js';
-import { initSectionTracking, initConversionTracking } from './analytics.js';
+import { initSectionTracking } from './analytics.js';
 
 const strings = {
     fi: {
@@ -41,4 +41,3 @@ initGlobe();
 initSectionTracking([
     { path: '/valvonta', id: 'main' }
 ]);
-initConversionTracking();

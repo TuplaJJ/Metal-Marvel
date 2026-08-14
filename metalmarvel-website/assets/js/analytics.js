@@ -1,6 +1,6 @@
-/* Vercel Web Analytics & Section Routing Module
-   Provides deduplicated section-level and subpage pageview tracking
-   as well as conversion event tracking (phone clicks, emails, CTA requests). */
+/* Vercel Web Analytics Section & Subpage Tracking Module
+   Tracks section pageviews (/palvelut, /meista, /yhteystiedot) and subpages (/valvonta, /)
+   directly in the Vercel Analytics dashboard without any custom events. */
 
 const _trackedPaths = new Set();
 
@@ -18,23 +18,26 @@ export function trackPageview(path) {
 }
 
 /**
- * Reports a custom event to Vercel Web Analytics.
- * @param {string} name
- * @param {object} [data]
- */
-export function trackEvent(name, data = {}) {
-    if (typeof window.va === 'function') {
-        window.va('event', { name, ...data });
-    }
-}
-
-/**
  * Attaches scroll-based section tracking for single-page sections.
  * @param {Array<{path: string, id: string}>} routes
  */
 export function initSectionTracking(routes) {
     const initialPath = window.location.pathname.replace(/\/index\.html$/, '') || '/';
     trackPageview(initialPath);
+
+    // If landing directly on a clean section route (e.g. /meista, /palvelut, /yhteystiedot),
+    // smooth scroll to the target section after DOM is ready
+    const landingRoute = routes.find((r) => r.path === initialPath && r.id);
+    if (landingRoute) {
+        window.addEventListener('DOMContentLoaded', () => {
+            const target = document.getElementById(landingRoute.id);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        });
+    }
 
     if (!('IntersectionObserver' in window)) return;
 
@@ -49,7 +52,7 @@ export function initSectionTracking(routes) {
                 }
             }
         },
-        { threshold: 0.3 }
+        { threshold: 0.35 }
     );
 
     for (const route of routes) {
@@ -57,32 +60,4 @@ export function initSectionTracking(routes) {
         const el = document.getElementById(route.id);
         if (el) observer.observe(el);
     }
-}
-
-/**
- * Attaches conversion listeners (phone calls, email clicks, CTA submissions).
- */
-export function initConversionTracking() {
-    document.addEventListener('click', (event) => {
-        const target = event.target.closest('a, button');
-        if (!target) return;
-
-        const href = target.getAttribute('href') || '';
-
-        if (href.startsWith('tel:')) {
-            trackEvent('click_phone', { phone: href.replace('tel:', '') });
-        } else if (href.startsWith('mailto:')) {
-            trackEvent('click_email', { email: href.replace('mailto:', '') });
-        } else if (
-            target.classList.contains('nav-cta') ||
-            target.classList.contains('card-cta') ||
-            target.classList.contains('btn-primary')
-        ) {
-            trackEvent('click_quote_cta', { text: target.textContent.trim(), href });
-        } else if (target.classList.contains('fb-icon')) {
-            trackEvent('click_social_facebook');
-        } else if (target.classList.contains('ig-icon')) {
-            trackEvent('click_social_instagram');
-        }
-    }, { passive: true });
 }

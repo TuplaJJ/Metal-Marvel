@@ -128,6 +128,11 @@ function handleRequest(req, res) {
 
   if (reqPath.endsWith('/')) reqPath += 'index.html';
 
+  // Rewrite clean section routes to index.html
+  if (reqPath === '/palvelut' || reqPath === '/meista' || reqPath === '/yhteystiedot') {
+    reqPath = '/index.html';
+  }
+
   const filePath = resolveWithinPublicDir(reqPath);
   if (!filePath) {
     return send(res, 403, '<h1>403 Forbidden</h1>');
