@@ -41,7 +41,9 @@ function isAllowedHost(hostHeader) {
   if (!hostHeader) return true;
   const host = hostHeader.split(':')[0].toLowerCase();
   if (ALLOWED_HOSTS.has(host)) return true;
-  if (host.endsWith('.vercel.app')) return true;
+  if (host.endsWith('.vercel.app') || host.endsWith('.vercel.dev')) return true;
+  if (/^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|127\.0\.0\.1|0\.0\.0\.0)/.test(host)) return true;
+  if (host.endsWith('.local')) return true;
   return false;
 }
 
@@ -89,8 +91,22 @@ function resolveWithinPublicDir(reqPath) {
   return candidate;
 }
 
+function serveFileStream(filePath, stats, res) {
+  const ext = path.extname(filePath).toLowerCase();
+  res.writeHead(200, {
+    'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
+    'Content-Length': stats.size,
+    ...SECURITY_HEADERS
+  });
+
+  const stream = fs.createReadStream(filePath);
+  stream.on('error', () => res.destroy());
+  res.on('close', () => stream.destroy());
+  stream.pipe(res);
+}
+
 function handleRequest(req, res) {
-  // Validate Host header against strict domain allowlist
+  // Validate Host header against domain allowlist
   if (!isAllowedHost(req.headers.host)) {
     return send(res, 403, '<h1>403 Forbidden: Unauthorized Host</h1>');
   }
@@ -99,8 +115,6 @@ function handleRequest(req, res) {
   try {
     reqPath = decodeURIComponent(req.url.split('?')[0]);
   } catch {
-    // A stray '%' in the URL makes decodeURIComponent throw. Uncaught, that used
-    // to take the whole process down on a single malformed request.
     return send(res, 400, '<h1>400 Bad Request</h1>');
   }
 
@@ -117,24 +131,25 @@ function handleRequest(req, res) {
   }
 
   fs.stat(filePath, (err, stats) => {
-    if (err || !stats.isFile()) {
-      return send(res, 404, '<h1>404 Not Found</h1>');
+    if (!err && stats.isFile()) {
+      return serveFileStream(filePath, stats, res);
     }
 
-    const ext = path.extname(filePath).toLowerCase();
-    res.writeHead(200, {
-      'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
-      'Content-Length': stats.size,
-      ...SECURITY_HEADERS
-    });
+    // Clean URL fallback: try appending .html if bare slug requested (e.g. /valvonta -> /valvonta.html)
+    if (!reqPath.endsWith('.html')) {
+      const htmlPath = resolveWithinPublicDir(reqPath + '.html');
+      if (htmlPath) {
+        fs.stat(htmlPath, (htmlErr, htmlStats) => {
+          if (!htmlErr && htmlStats.isFile()) {
+            return serveFileStream(htmlPath, htmlStats, res);
+          }
+          return send(res, 404, '<h1>404 Not Found</h1>');
+        });
+        return;
+      }
+    }
 
-    const stream = fs.createReadStream(filePath);
-    // Headers are already sent by this point, so the only correct response to a
-    // mid-stream failure is to drop the connection — but it must be handled, or
-    // the unhandled 'error' event terminates the process.
-    stream.on('error', () => res.destroy());
-    res.on('close', () => stream.destroy());
-    stream.pipe(res);
+    return send(res, 404, '<h1>404 Not Found</h1>');
   });
 }
 
