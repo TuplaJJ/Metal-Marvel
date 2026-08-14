@@ -129,6 +129,16 @@ function handleRequest(req, res) {
     return send(res, 400, '<h1>400 Bad Request</h1>');
   }
 
+  // Gracefully mock Vercel Insights during local development
+  if (reqPath.startsWith('/_vercel/insights/script.js')) {
+    res.writeHead(200, { 'Content-Type': 'application/javascript; charset=UTF-8' });
+    return res.end('/* Vercel Analytics Local Dev Mock */');
+  }
+  if (reqPath.startsWith('/_vercel/insights/view') || reqPath.startsWith('/_vercel/insights/event')) {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: true }));
+  }
+
   // Reject NUL bytes outright rather than letting them reach the filesystem.
   if (reqPath.includes('\0')) {
     return send(res, 400, '<h1>400 Bad Request</h1>');
