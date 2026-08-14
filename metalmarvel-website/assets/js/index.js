@@ -2,6 +2,7 @@
 
 import { initI18n } from './i18n.js';
 import { initNav, initReveal, reducedMotion } from './ui.js';
+import { initSectionTracking, initConversionTracking } from './analytics.js';
 
 const strings = {
     fi: {
@@ -114,6 +115,15 @@ initI18n({
 
 initNav();
 initReveal();
+
+// Track section pageviews and conversions with Vercel Web Analytics
+initSectionTracking([
+    { path: '/', id: 'hero' },
+    { path: '/palvelut', id: 'hitsaus-ja-asennustyot' },
+    { path: '/meista', id: 'meista' },
+    { path: '/yhteystiedot', id: 'contact' }
+]);
+initConversionTracking();
 
 /* --- Animated stat counters --- */
 
