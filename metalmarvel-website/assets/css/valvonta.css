@@ -18,7 +18,7 @@
 }
 
 .valvonta-hero {
-    background: linear-gradient(180deg, rgba(10, 10, 10, 0.45) 0%, rgba(10, 10, 10, 0.75) 100%), url('../img/valvonta-hero.jpg') no-repeat center center / cover;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.45) 0%, rgba(10, 10, 10, 0.75) 100%), url('../img/valvonta-hero.webp') no-repeat center center / cover;
     padding: clamp(60px, 10vw, 110px) 5% clamp(50px, 8vw, 95px) 5%;
     border-bottom: 1px solid var(--border-subtle);
     text-align: left;

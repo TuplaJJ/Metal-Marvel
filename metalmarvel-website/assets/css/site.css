@@ -357,7 +357,7 @@ footer.site-footer {
 }
 
 .footer-links-list a {
-    color: #a0a5aa;
+    color: #d1d5db;
     font-size: 17px;
     text-decoration: none;
     transition: padding-left 0.3s ease, color 0.3s ease;
@@ -370,7 +370,7 @@ footer.site-footer {
 
 .footer-contact-info {
     font-size: 17px;
-    color: #a0a5aa;
+    color: #d1d5db;
     line-height: 1.6;
 }
 
@@ -397,7 +397,7 @@ footer.site-footer {
 
 .footer-bottom-text {
     font-size: 16px;
-    color: #6c7278;
+    color: #9ca3af;
 }
 
 .footer-credit {

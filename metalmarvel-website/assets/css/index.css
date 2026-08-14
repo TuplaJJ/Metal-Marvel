@@ -9,7 +9,7 @@
     align-items: flex-start;
     text-align: left;
     padding: calc(var(--nav-height) + 16px) 10% 60px 5%;
-    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('../img/hero-bg.jpg') no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('../img/hero-bg.webp') no-repeat center center;
     background-size: cover;
 }
 
@@ -57,7 +57,7 @@
     font-family: var(--font-heading);
     font-size: 0.85rem;
     font-weight: 700;
-    color: #666666;
+    color: #a3a3a3;
     text-transform: uppercase;
     letter-spacing: 2px;
 }

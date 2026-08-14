@@ -14,9 +14,9 @@
     <meta property="og:title" content="Valvonta | Metal Marvel Oy" />
     <meta property="og:description" content="Asennusvalvontaa, työnjohtoa ja hitsauksen laadunvarmistusta yli 30 vuoden kokemuksella — Pohjanmaalta ympäri maailmaa." />
     <meta property="og:url" content="https://www.metalmarvel.fi/valvonta.html" />
-    <meta property="og:image" content="https://www.metalmarvel.fi/assets/img/valvonta-hero.jpg" />
-    <meta property="og:image:width" content="1024" />
-    <meta property="og:image:height" content="1024" />
+    <meta property="og:image" content="https://www.metalmarvel.fi/assets/img/valvonta-hero.webp" />
+    <meta property="og:image:width" content="1440" />
+    <meta property="og:image:height" content="960" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
@@ -25,9 +25,14 @@
     <meta name="theme-color" content="#0A0A0A" />
     <link rel="alternate" type="text/plain" href="llms.txt" title="LLMs.txt" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+    <!-- Preload Critical Self-Hosted Fonts (Zero external Google requests) -->
+    <link rel="preload" href="assets/fonts/audiowide-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/montserrat-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/montserrat-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload Hero LCP Image -->
+    <link rel="preload" as="image" href="assets/img/valvonta-hero.webp" type="image/webp" fetchpriority="high" />
+
     <link rel="stylesheet" href="assets/css/fonts.css" />
     <link rel="stylesheet" href="assets/css/site.css" />
     <link rel="stylesheet" href="assets/css/valvonta.css" />
@@ -38,8 +43,8 @@
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "Metal Marvel Oy - Asennus- ja työnjohto",
-      "image": "https://www.metalmarvel.fi/assets/img/asennus-tyonjohto.jpg",
-      "logo": "https://www.metalmarvel.fi/assets/img/logo.png",
+      "image": "https://www.metalmarvel.fi/assets/img/asennus-tyonjohto.webp",
+      "logo": "https://www.metalmarvel.fi/assets/img/logo.webp",
       "description": "Kansainvälinen asennusvalvonta, työnjohto ja hitsauksen laadunvarmistus yli 30 vuoden kokemuksella.",
       "url": "https://www.metalmarvel.fi/valvonta.html",
       "telephone": ["+358405877238", "+358400865891"],
@@ -59,15 +64,14 @@
     }
     </script>
 
-    <!-- Not deferred: see index.html -->
-    <script src="assets/js/boot.js"></script>
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
     <!-- NAVBAR -->
     <nav>
         <a href="index.html#hero" class="logo">
-            <img src="assets/img/logo.png" alt="Metal Marvel Oy" width="510" height="266">
+            <img src="assets/img/logo.webp" alt="Metal Marvel Oy" width="510" height="266" fetchpriority="high">
         </a>
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html#hero" data-key="nav_home">ETUSIVU</a></li>
@@ -114,12 +118,10 @@
                 </p>
             </div>
 
-            <!-- Right Column: decorative globe. The countries it represents are
-                 listed in the paragraph above, so it carries no information of its
-                 own and is hidden from assistive technology. -->
+            <!-- Right Column: decorative globe -->
             <div class="valvonta-globe-col">
                 <div id="globe-wrapper">
-                    <img id="globe-core-logo" src="assets/img/logo.png" alt="" width="510" height="266">
+                    <img id="globe-core-logo" src="assets/img/logo.webp" alt="" width="510" height="266">
                     <canvas id="globe-canvas" aria-hidden="true"></canvas>
                 </div>
             </div>
@@ -140,7 +142,7 @@
         <div class="footer-grid">
             <div>
                 <a href="index.html#hero" class="footer-logo">
-                    <img src="assets/img/logo.png" alt="Metal Marvel Oy" class="footer-logo-img" width="510" height="266" loading="lazy" decoding="async">
+                    <img src="assets/img/logo.webp" alt="Metal Marvel Oy" class="footer-logo-img" width="510" height="266" loading="lazy" decoding="async">
                 </a>
                 <p class="footer-description" data-key="footer_description">
                     TEOLLISUUDEN JA RAKENTAMISEN KUMPPANI YLI 30 VUODEN KOKEMUKSELLA
