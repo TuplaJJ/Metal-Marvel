@@ -31,7 +31,7 @@
 }
 
 .valvonta-hero h1 {
-    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+    font-size: clamp(1.98rem, 5vw, 3.78rem);
     color: var(--accent);
     margin-bottom: 1.5rem;
     line-height: 1.15;
@@ -60,7 +60,7 @@
 }
 
 .valvonta-text-col h2 {
-    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    font-size: clamp(1.44rem, 2.7vw, 2.07rem);
     color: var(--accent);
     line-height: 1.25;
     margin-bottom: 1.4rem;
@@ -189,10 +189,10 @@
 
 @media (max-width: 480px) {
     .valvonta-hero h1 {
-        font-size: clamp(1.7rem, 7.5vw, 2.4rem);
+        font-size: clamp(1.53rem, 6.75vw, 2.16rem);
     }
     .valvonta-text-col h2 {
-        font-size: clamp(1.4rem, 6vw, 1.85rem);
+        font-size: clamp(1.26rem, 5.4vw, 1.66rem);
     }
     #globe-wrapper {
         max-width: min(320px, 90vw);
