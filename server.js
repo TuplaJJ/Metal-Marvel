@@ -37,6 +37,14 @@ const ALLOWED_HOSTS = new Set([
   '127.0.0.1'
 ]);
 
+function isAllowedHost(hostHeader) {
+  if (!hostHeader) return true;
+  const host = hostHeader.split(':')[0].toLowerCase();
+  if (ALLOWED_HOSTS.has(host)) return true;
+  if (host.endsWith('.vercel.app')) return true;
+  return false;
+}
+
 /* Kept in step with vercel.json. Strict zero-trust security headers. */
 const SECURITY_HEADERS = {
   'Content-Security-Policy': [
@@ -83,8 +91,7 @@ function resolveWithinPublicDir(reqPath) {
 
 function handleRequest(req, res) {
   // Validate Host header against strict domain allowlist
-  const hostHeader = (req.headers.host || '').split(':')[0].toLowerCase();
-  if (hostHeader && !ALLOWED_HOSTS.has(hostHeader)) {
+  if (!isAllowedHost(req.headers.host)) {
     return send(res, 403, '<h1>403 Forbidden: Unauthorized Host</h1>');
   }
 
