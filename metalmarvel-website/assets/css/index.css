@@ -204,6 +204,7 @@
 #meista {
     padding-top: 180px;
     padding-bottom: 140px;
+    overflow: hidden;
 }
 
 .about-content {
@@ -295,7 +296,7 @@
     mix-blend-mode: screen;
     background: transparent;
     filter: contrast(1.08) brightness(1.08);
-    transform: scale(1.65);
+    transform: translateX(30%) scale(1.65);
     transform-origin: center center;
     display: block;
     margin: 0 auto;
