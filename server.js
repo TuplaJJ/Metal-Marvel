@@ -9,7 +9,14 @@ const path = require('path');
 
 const START_PORT = Number(process.env.PORT) || 3000;
 const MAX_PORT_ATTEMPTS = 10;
-const PUBLIC_DIR = path.join(__dirname, 'metalmarvel-website');
+const PUBLIC_DIR = __dirname;
+
+const BLOCKED_FILES = new Set([
+  'server.js',
+  'package.json',
+  'package-lock.json',
+  'vercel.json'
+]);
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=UTF-8',
@@ -79,11 +86,15 @@ function send(res, status, body, extraHeaders = {}) {
   res.end(body);
 }
 
-/* path.join already collapses `..`, but a bare startsWith() on the resolved path
-   would also accept a *sibling* directory that merely shares the prefix
-   (…/metalmarvel-website-private). path.relative is the containment test that
-   actually holds. */
+/* Disallow dotfiles (.git, .github), node_modules, and sensitive project configuration files. */
 function resolveWithinPublicDir(reqPath) {
+  if (reqPath.startsWith('/.') || reqPath.startsWith('/node_modules') || reqPath.startsWith('/.git')) {
+    return null;
+  }
+  const cleanName = path.basename(reqPath);
+  if (BLOCKED_FILES.has(cleanName)) {
+    return null;
+  }
   const candidate = path.resolve(PUBLIC_DIR, '.' + reqPath);
   const rel = path.relative(PUBLIC_DIR, candidate);
   if (rel === '') return candidate;
