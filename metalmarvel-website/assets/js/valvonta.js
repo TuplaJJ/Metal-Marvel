@@ -41,3 +41,17 @@ initGlobe();
 initSectionTracking([
     { path: '/valvonta', id: 'main' }
 ]);
+
+/* The contact CTA navigates to a different page (index.html#contact), so a plain
+   anchor jump lands instantly with no animation. Hand the target off via
+   sessionStorage and let index.js perform the smooth scroll once it has loaded. */
+const contactCta = document.getElementById('valvonta-contact-cta');
+contactCta?.addEventListener('click', (event) => {
+    event.preventDefault();
+    try {
+        sessionStorage.setItem('mm-smooth-scroll-target', 'contact');
+    } catch {
+        /* Storage unavailable (e.g. private browsing) — fall back to a normal jump. */
+    }
+    window.location.href = 'index.html';
+});

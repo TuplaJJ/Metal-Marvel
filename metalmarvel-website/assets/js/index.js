@@ -116,9 +116,20 @@ initI18n({
 initNav();
 initReveal();
 
+/* A cross-page CTA (e.g. valvonta.html) may have asked for a smooth scroll to a
+   specific section on arrival — peeked here, not consumed, so the handoff logic
+   further down still owns clearing it. Landing this way is not "landing on the
+   hero route", so the hero entry is dropped to avoid it fighting that scroll. */
+let pendingSmoothScrollTarget = null;
+try {
+    pendingSmoothScrollTarget = sessionStorage.getItem('mm-smooth-scroll-target');
+} catch {
+    /* Storage unavailable — nothing to peek, the handoff below will no-op too. */
+}
+
 // Track section pageviews with Vercel Web Analytics
 initSectionTracking([
-    { path: '/', id: 'hero' },
+    { path: '/', id: pendingSmoothScrollTarget ? null : 'hero' },
     { path: '/palvelut', id: 'hitsaus-ja-asennustyot' },
     { path: '/meista', id: 'meista' },
     { path: '/yhteystiedot', id: 'contact' }
@@ -224,4 +235,30 @@ initCounters();
         settle();
         setTimeout(settle, 0);
     });
+})();
+
+/* --- Smooth-scroll handoff from cross-page CTAs (e.g. valvonta.html) ---
+   A plain #hash link across pages lands instantly with no animation. Pages that
+   want a smooth arrival instead store the target id here before navigating. */
+(function smoothScrollToHandoffTarget() {
+    const id = pendingSmoothScrollTarget;
+    try {
+        sessionStorage.removeItem('mm-smooth-scroll-target');
+    } catch {
+        /* Storage unavailable — nothing was stored either, so id is already null. */
+    }
+    if (!id) return;
+
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const scroll = () => {
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 0);
+    };
+
+    // Module scripts are deferred, so 'load' may already have fired by the time
+    // this runs (fast/cached page loads) — a listener added after the fact would
+    // never call back.
+    if (document.readyState === 'complete') scroll();
+    else window.addEventListener('load', scroll);
 })();

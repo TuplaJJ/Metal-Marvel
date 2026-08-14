@@ -67,7 +67,41 @@
     }
     </script>
 
-    <script>document.documentElement.classList.add('js');</script>
+    <!-- Primary site navigation, as a hint for search engine sitelinks -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "SiteNavigationElement",
+        "position": 1,
+        "name": "Palvelut",
+        "url": "https://www.metalmarvel.fi/#hitsaus-ja-asennustyot"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SiteNavigationElement",
+        "position": 2,
+        "name": "Valvonta",
+        "url": "https://www.metalmarvel.fi/valvonta.html"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SiteNavigationElement",
+        "position": 3,
+        "name": "Meistä",
+        "url": "https://www.metalmarvel.fi/#meista"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SiteNavigationElement",
+        "position": 4,
+        "name": "Pyydä tarjous",
+        "url": "https://www.metalmarvel.fi/#contact"
+      }
+    ]
+    </script>
+
+    <script src="assets/js/boot.js"></script>
 </head>
 <body>
 
