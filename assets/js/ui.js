@@ -43,21 +43,27 @@ export function initNav() {
 /** Fades sections in as they scroll into view. */
 export function initReveal() {
     const targets = document.querySelectorAll('.reveal');
-
-    if (reducedMotion.matches) {
-        for (const el of targets) el.classList.add('active');
-        return;
-    }
+    if (reducedMotion.matches) return;
 
     const observer = new IntersectionObserver(
         (entries) => {
             for (const entry of entries) {
                 if (!entry.isIntersecting) continue;
                 entry.target.classList.add('active');
-                /* One-shot: nothing re-hides, so stop paying for the observation. */
                 observer.unobserve(entry.target);
             }
         },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    for (const el of targets) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+            el.classList.add('reveal-init');
+            observer.observe(el);
+        }
+    }
+}
         { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
     );
 

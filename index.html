@@ -6,7 +6,10 @@
 
     <title>Metal Marvel Oy: Teollisuuden kunnossapito</title>
     <meta name="description" content="Metal Marvel Oy on voimalaitosten asennus- ja valvontatöihin erikoistunut yritys. Toimimme kaikissa teollisuuden kunnossapitoon liittyvissä urakoissa Pohjanmaan alueella ja koko Suomessa." />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.metalmarvel.fi/" />
+    <link rel="alternate" hreflang="fi" href="https://www.metalmarvel.fi/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.metalmarvel.fi/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Metal Marvel Oy" />
@@ -23,7 +26,7 @@
     <link rel="icon" href="favicon-512.png" sizes="512x512" type="image/png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <meta name="theme-color" content="#0A0A0A" />
-    <link rel="alternate" type="text/plain" href="llms.txt" title="LLMs.txt" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLMs.txt" />
 
     <!-- Preload Critical Self-Hosted Fonts (Zero external Google requests) -->
     <link rel="preload" href="assets/fonts/audiowide-400-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -45,7 +48,7 @@
       "name": "Metal Marvel Oy",
       "image": "https://www.metalmarvel.fi/assets/img/hero-bg.webp",
       "logo": "https://www.metalmarvel.fi/assets/img/logo.webp",
-      "description": "Teollisuuden putkisto-, teräsrakenne-, laiteasennus- ja kunnossapitoprojektit sekä hitsaustöiden valvonta yli 30 vuoden kokemuksella.",
+      "description": "Metal Marvel Oy on voimalaitosten asennus- ja valvontatöihin erikoistunut yritys. Toimimme kaikissa teollisuuden kunnossapitoon liittyvissä urakoissa Pohjanmaan alueella ja koko Suomessa.",
       "url": "https://www.metalmarvel.fi/",
       "telephone": ["+358405877238", "+358400865891"],
       "email": "juhana.perala@metalmarvel.fi",
@@ -95,16 +98,16 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-        <h1 class="reveal" data-key="hero_title">KUN PROJEKTI VAATII OSAAMISTA <br><span class="accent">EIKÄ PELKKIÄ TEKIJÖITÄ.</span></h1>
-        <p class="reveal" data-key="hero_desc">Metal Marvel Oy:n taustalla on yli 30 vuoden kokemus vaativista teollisuuden putkisto-, teräsrakenne-, laiteasennus- ja kunnossapitoprojekteista. Toimimme Pohjanmaalta käsin kaikkialla Suomessa sekä kansainvälisissä projekteissa.</p>
-        <div class="reveal">
+        <h1 data-key="hero_title">KUN PROJEKTI VAATII OSAAMISTA <br><span class="accent">EIKÄ PELKKIÄ TEKIJÖITÄ.</span></h1>
+        <p data-key="hero_desc">Metal Marvel Oy:n taustalla on yli 30 vuoden kokemus vaativista teollisuuden putkisto-, teräsrakenne-, laiteasennus- ja kunnossapitoprojekteista. Toimimme Pohjanmaalta käsin kaikkialla Suomessa sekä kansainvälisissä projekteissa.</p>
+        <div>
             <a href="#contact" class="nav-cta" data-key="hero_cta">PYYDÄ TARJOUS</a>
         </div>
     </section>
 
     <!-- REFERENCES ROW -->
     <section class="references-row">
-        <div class="reveal references-inner">
+        <div class="references-inner">
             <p class="references-title" data-key="ref_title">LUOTETTAVAT KUMPPANIT &amp; REFERENSSIT</p>
             <div class="partner-logos-row">
                 <div class="partner-logo-item">
@@ -138,7 +141,7 @@
                 <div class="card">
                     <h3 data-key="service1_title">Putkistoasennukset</h3>
                     <p class="service-desc" data-key="service1_desc">Toteutamme putkistoasennuksia erilaisiin prosessi-, tuotanto- ja työympäristöihin hiiliteräs-, ruostumattomille, haponkestäville ja duplex-putkistoille.</p>
-                    <a href="#contact" class="card-cta" data-key="card_cta">Pyydä tarjous</a>
+                    <a href="#contact" class="card-cta" data-key="card_cta" aria-label="Pyydä tarjous: Putkistoasennukset">Pyydä tarjous</a>
                 </div>
             </div>
             <!-- Row 2: Teräsrakenteet -->
@@ -149,7 +152,7 @@
                 <div class="card">
                     <h3 data-key="service2_title">Teräsrakenteet</h3>
                     <p class="service-desc" data-key="service2_desc">Valmistamme, asennamme ja muokkaamme teräsrakenteita sekä toteutamme korjaus-, huolto- ja muutostöitä asiakkaan tarpeiden mukaisesti.</p>
-                    <a href="#contact" class="card-cta" data-key="card_cta">Pyydä tarjous</a>
+                    <a href="#contact" class="card-cta" data-key="card_cta" aria-label="Pyydä tarjous: Teräsrakenteet">Pyydä tarjous</a>
                 </div>
             </div>
             <!-- Row 3: Laiteasennukset -->
@@ -158,9 +161,9 @@
                     <img src="assets/img/laiteasennukset.webp" alt="Laiteasennukset" data-key-alt="service3_title" width="800" height="533" loading="lazy" decoding="async">
                 </div>
                 <div class="card">
-                    <h3 data-key="service3_title">Laiteasennukset</h3>
+                    <h3 data-key="service2_title">Laiteasennukset</h3>
                     <p class="service-desc" data-key="service3_desc">Asennamme koneita, laitteita ja tuotantolinjoja huolellisesti ja turvallisesti käyttöönottoon saakka.</p>
-                    <a href="#contact" class="card-cta" data-key="card_cta">Pyydä tarjous</a>
+                    <a href="#contact" class="card-cta" data-key="card_cta" aria-label="Pyydä tarjous: Laiteasennukset">Pyydä tarjous</a>
                 </div>
             </div>
             <!-- Row 4: Kunnossapito -->
@@ -171,7 +174,7 @@
                 <div class="card">
                     <h3 data-key="service4_title">Kunnossapito</h3>
                     <p class="service-desc" data-key="service4_desc">Huolehdimme ennakoivasta kunnossapidosta, huolloista, korjauksista ja muutostöistä tuotanto- ja työympäristöissä.</p>
-                    <a href="#contact" class="card-cta" data-key="card_cta">Pyydä tarjous</a>
+                    <a href="#contact" class="card-cta" data-key="card_cta" aria-label="Pyydä tarjous: Kunnossapito">Pyydä tarjous</a>
                 </div>
             </div>
             <!-- Row 5: Resurssipalvelut -->
@@ -182,7 +185,7 @@
                 <div class="card">
                     <h3 data-key="service5_title">Resurssipalvelut</h3>
                     <p class="service-desc" data-key="service5_desc">Tarjoamme kokeneita metalli- ja teollisuusalan ammattilaisia asiakkaan käyttöön tunti- tai projektiperusteisesti. Resurssimme joustavat yksittäisestä tekijästä kokonaisiin työryhmiin.</p>
-                    <a href="#contact" class="card-cta" data-key="card_cta">Pyydä tarjous</a>
+                    <a href="#contact" class="card-cta" data-key="card_cta" aria-label="Pyydä tarjous: Resurssipalvelut">Pyydä tarjous</a>
                 </div>
             </div>
             <!-- Row 6: Asennus- ja työnjohto -->
@@ -193,7 +196,7 @@
                 <div class="card">
                     <h3 data-key="service6_title">Asennus- ja työnjohto</h3>
                     <p class="service-desc" data-key="service6_desc">Vastaamme työnjohdosta, työmaavalvonnasta ja projektien koordinoinnista sujuvan toteutuksen varmistamiseksi.</p>
-                    <a href="#contact" class="card-cta" data-key="card_cta">Pyydä tarjous</a>
+                    <a href="#contact" class="card-cta" data-key="card_cta" aria-label="Pyydä tarjous: Asennus- ja työnjohto">Pyydä tarjous</a>
                 </div>
             </div>
             <!-- Row 7: Projektipalvelut -->
@@ -204,7 +207,7 @@
                 <div class="card">
                     <h3 data-key="service7_title">Projektipalvelut</h3>
                     <p class="service-desc" data-key="service7_desc">Osallistumme projektien suunnitteluun, koordinointiin ja toteutukseen varmistaen laadukkaan lopputuloksen sekä aikataulujen hallinnan.</p>
-                    <a href="#contact" class="card-cta" data-key="card_cta">Pyydä tarjous</a>
+                    <a href="#contact" class="card-cta" data-key="card_cta" aria-label="Pyydä tarjous: Projektipalvelut">Pyydä tarjous</a>
                 </div>
             </div>
             <!-- Row 8: Metallituotteiden valmistus -->
@@ -215,7 +218,7 @@
                 <div class="card">
                     <h3 data-key="service8_title">Metallituotteiden valmistus</h3>
                     <p class="service-desc" data-key="service8_desc">Valmistamme mittatilaustyönä metallituotteita, rakenteita ja erikoisratkaisuja yrityksille sekä yksityisasiakkaille – yksittäiskappaleista pieniin sarjoihin.</p>
-                    <a href="#contact" class="card-cta" data-key="card_cta">Pyydä tarjous</a>
+                    <a href="#contact" class="card-cta" data-key="card_cta" aria-label="Pyydä tarjous: Metallituotteiden valmistus">Pyydä tarjous</a>
                 </div>
             </div>
         </div>
@@ -254,7 +257,7 @@
 
             <!-- Right Column: Metal Marvel Logo blended into background -->
             <div class="about-image-placeholder reveal">
-                <img src="assets/img/logo.webp" alt="" class="about-logo-img" width="510" height="266" loading="lazy" decoding="async">
+                <img src="assets/img/logo.webp" alt="Metal Marvel Oy logo" class="about-logo-img" width="510" height="266" loading="lazy" decoding="async">
             </div>
         </div>
 
@@ -285,7 +288,7 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="section" id="contact">
+    <section class="section" id="contact" itemscope itemtype="https://schema.org/ContactPoint">
         <div class="reveal contact-intro">
             <h2 data-key="contact_title">Pyydä tarjous tai kysy yrittäjiltä lisätietoja.</h2>
             <h3 class="contact-extra-title" data-key="contact_extra_title">Palvelemme myös yrityksiä ja yksityisasiakkaita</h3>
@@ -373,7 +376,7 @@
 
             <!-- Column 2 (Middle - Quick Links): -->
             <div>
-                <h2 class="footer-column-title" data-key="footer_col1_title">HYÖDYLLISTÄ</h2>
+                <p class="footer-column-title" data-key="footer_col1_title" role="heading" aria-level="3">HYÖDYLLISTÄ</p>
                 <ul class="footer-links-list">
                     <li><a href="index.html#hero" data-key="nav_home">ETUSIVU</a></li>
                     <li><a href="index.html#hitsaus-ja-asennustyot" data-key="nav_welding">PALVELUT</a></li>
@@ -385,7 +388,7 @@
 
             <!-- Column 3 (Right - Contact Info): -->
             <div>
-                <h2 class="footer-column-title" data-key="footer_col3_title">YHTEYSTIEDOT</h2>
+                <p class="footer-column-title" data-key="footer_col3_title" role="heading" aria-level="3">YHTEYSTIEDOT</p>
                 <div class="footer-contact-info">
                     <p><strong>Metal Marvel Oy</strong></p>
                     <p class="footer-contact-item">

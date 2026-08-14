@@ -37,23 +37,6 @@ const MIME_TYPES = {
   '.ttf': 'font/ttf'
 };
 
-const ALLOWED_HOSTS = new Set([
-  'metalmarvel.fi',
-  'www.metalmarvel.fi',
-  'localhost',
-  '127.0.0.1'
-]);
-
-function isAllowedHost(hostHeader) {
-  if (!hostHeader) return true;
-  const host = hostHeader.split(':')[0].toLowerCase();
-  if (ALLOWED_HOSTS.has(host)) return true;
-  if (host.endsWith('.vercel.app') || host.endsWith('.vercel.dev')) return true;
-  if (/^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|127\.0\.0\.1|0\.0\.0\.0)/.test(host)) return true;
-  if (host.endsWith('.local')) return true;
-  return false;
-}
-
 /* Kept in step with vercel.json. Strict zero-trust security headers. */
 const SECURITY_HEADERS = {
   'Content-Security-Policy': [
@@ -74,6 +57,8 @@ const SECURITY_HEADERS = {
   'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'Cross-Origin-Opener-Policy': 'same-origin',
+  'Cross-Origin-Resource-Policy': 'same-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=()'
 };
 
@@ -117,11 +102,6 @@ function serveFileStream(filePath, stats, res) {
 }
 
 function handleRequest(req, res) {
-  // Validate Host header against domain allowlist
-  if (!isAllowedHost(req.headers.host)) {
-    return send(res, 403, '<h1>403 Forbidden: Unauthorized Host</h1>');
-  }
-
   let reqPath;
   try {
     reqPath = decodeURIComponent(req.url.split('?')[0]);

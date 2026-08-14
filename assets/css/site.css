@@ -270,17 +270,22 @@ body.no-scroll {
 }
 
 /* --- REVEAL ANIMATIONS --- */
-/* Scoped to .js so that with JavaScript disabled or broken the content is simply
-   visible, rather than the whole page staying at opacity: 0. */
-.js .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 800ms var(--ease-standard), transform 800ms var(--ease-standard);
+.reveal {
+    opacity: 1;
+    transform: none;
 }
 
-.js .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+@media (prefers-reduced-motion: no-preference) {
+    .reveal-init {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 600ms var(--ease-standard), transform 600ms var(--ease-standard);
+    }
+
+    .reveal-init.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- FOOTER --- */
