@@ -4,7 +4,8 @@
   "description": "Metal Marvel Oy website",
   "private": true,
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build": "echo 'Static site ready'"
   },
   "devDependencies": {
     "sharp": "^0.35.3"
