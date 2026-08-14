@@ -39,11 +39,20 @@ const MIME_TYPES = {
   '.ttf': 'font/ttf'
 };
 
-/* Kept in step with vercel.json. Strict zero-trust security headers. */
+/* Kept in step with vercel.json. Strict zero-trust security headers.
+
+   script-src has no 'unsafe-inline': the only inline <script> left on either
+   page (the Vercel Analytics window.va snippet) is allowlisted by exact hash
+   instead. JSON-LD blocks don't need a hash — type="application/ld+json" is
+   inert data, not executable script, so CSP's script-src doesn't govern it.
+   If that inline script's content ever changes, recompute the hash with:
+     node -e "console.log('sha256-' + require('crypto').createHash('sha256').update('EXACT_SCRIPT_TEXT','utf8').digest('base64'))"
+   using the exact text between the <script> tags (including whitespace) from
+   metalmarvel-website/index.html and valvonta.html — both currently match. */
 const SECURITY_HEADERS = {
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'",
+    "script-src 'self' 'sha256-ONRZYZuShNwVHh3BUwUvQfVbsjTNyL0canAx8F8t4SY='",
     "style-src 'self' 'unsafe-inline'",
     "font-src 'self' data:",
     "img-src 'self' data:",

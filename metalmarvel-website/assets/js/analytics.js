@@ -26,8 +26,12 @@ export function initSectionTracking(routes) {
     trackPageview(initialPath);
 
     // If landing directly on a clean section route (e.g. /meista, /palvelut, /yhteystiedot),
-    // smooth scroll to the target section after DOM is ready
-    const landingRoute = routes.find((r) => r.path === initialPath && r.id);
+    // smooth scroll to the target section after DOM is ready. Skipped when the URL
+    // already carries a hash — e.g. index.html#hitsaus-ja-asennustyot — since that
+    // hash may point at a different section than this route's own target (the '/'
+    // route's target is 'hero'), and index.js's correctHashLanding already owns
+    // getting hash-based landings to the right place.
+    const landingRoute = !location.hash && routes.find((r) => r.path === initialPath && r.id);
     if (landingRoute) {
         window.addEventListener('DOMContentLoaded', () => {
             const target = document.getElementById(landingRoute.id);
