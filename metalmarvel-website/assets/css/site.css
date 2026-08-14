@@ -1,0 +1,594 @@
+/* Shared across every page: design tokens, reset, nav, footer, buttons, reveal.
+   Page-specific rules live in index.css / valvonta.css, which are loaded after
+   this file and may override the tokens below. */
+
+:root {
+    /* 60% Dominant: Backgrounds */
+    --bg-primary: #0A0A0A;
+    --bg-card: #1A1A1A;
+
+    /* 30% Secondary: Typography & Borders */
+    --text-main: #FFFFFF;
+    --text-muted: #E5E7EB;
+    --border-subtle: #333333;
+
+    /* 10% Accent: Highlights */
+    --accent: #FFD700;
+    --accent-glow: rgba(255, 215, 0, 0.3);
+
+    /* Typography */
+    --font-heading: 'Audiowide', cursive;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Animation Timing */
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 150ms var(--ease-standard);
+    --transition-slow: 600ms var(--ease-standard);
+
+    /* Nav height, per breakpoint. The hero and the anchor offsets both key off
+       this, so the three values below are the single source of truth. */
+    --nav-height: 154px;
+}
+
+/* --- RESET & BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Only the scroll container needs this — it was previously on `*`, where it had
+   no effect on 200+ elements. */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-height) + 20px);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+}
+
+h2 {
+    font-size: 2.75rem;
+    margin-bottom: 2rem;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+/* Used inside translated strings that highlight part of a heading. */
+.accent { color: var(--accent); }
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    border-bottom: none;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: var(--nav-height);
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-size: 1.15rem;
+    font-weight: 700;
+    transition: var(--transition-fast);
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--accent); }
+
+.nav-cta {
+    background: var(--accent);
+    color: var(--bg-primary) !important;
+    padding: 0.9rem 1.8rem;
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    border-radius: 3px;
+    transition: var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.nav-cta:hover {
+    background: var(--text-main);
+    color: var(--bg-primary) !important;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.nav-cta:active {
+    transform: scale(0.98);
+}
+
+#lang-toggle {
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    border-radius: 3px;
+    transition: var(--transition-fast);
+    min-height: 44px;
+    min-width: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+}
+
+#lang-toggle:hover {
+    background: var(--accent);
+    color: var(--bg-primary);
+}
+
+#lang-toggle:active {
+    transform: scale(0.96);
+}
+
+/* --- MOBILE MENU BUTTON --- */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0.5rem;
+    min-width: 48px;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    transition: var(--transition-fast);
+    touch-action: manipulation;
+}
+
+.mobile-menu-btn:hover {
+    color: var(--accent);
+}
+
+.mobile-menu-btn svg line {
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.mobile-menu-btn[aria-expanded="true"] svg line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+.mobile-menu-btn[aria-expanded="true"] svg line:nth-child(2) {
+    opacity: 0;
+}
+.mobile-menu-btn[aria-expanded="true"] svg line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* --- BUTTONS --- */
+.btn {
+    padding: 1rem 2.5rem;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* --- SHARED CTA BOX --- */
+/* Appears at the end of the services list on the homepage and at the end of the
+   supervision page. Identical on both, so it lives here. */
+.cta-box {
+    max-width: 900px;
+    margin: 4rem auto 0 auto;
+    padding: 3.5rem 2.5rem;
+    background: linear-gradient(135deg, #141414 0%, #0a0a0a 100%);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.cta-box h3 {
+    font-family: var(--font-heading);
+    font-size: 2.16rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.cta-box p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 750px;
+    margin: 0 auto 2rem auto;
+}
+
+.cta-box .btn {
+    font-size: 1.58rem;
+    padding: 1.2rem 3.5rem;
+}
+
+/* --- REVEAL ANIMATIONS --- */
+/* Scoped to .js so that with JavaScript disabled or broken the content is simply
+   visible, rather than the whole page staying at opacity: 0. */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 800ms var(--ease-standard), transform 800ms var(--ease-standard);
+}
+
+.js .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- FOOTER --- */
+footer.site-footer {
+    background-color: #050505;
+    color: var(--text-main);
+    padding: 80px 5% 40px;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-body);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 50px;
+}
+
+.footer-logo {
+    display: block;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
+.footer-logo-img {
+    height: 141px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.footer-description {
+    font-family: var(--font-heading);
+    font-size: 1.44rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    max-width: 550px;
+    margin-top: 1rem;
+}
+
+.footer-column-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 24px;
+    position: relative;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-column-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--accent);
+}
+
+.footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links-list li {
+    margin-bottom: 12px;
+}
+
+.footer-links-list a {
+    color: #a0a5aa;
+    font-size: 17px;
+    text-decoration: none;
+    transition: padding-left 0.3s ease, color 0.3s ease;
+}
+
+.footer-links-list a:hover {
+    color: var(--accent);
+    padding-left: 4px;
+}
+
+.footer-contact-info {
+    font-size: 17px;
+    color: #a0a5aa;
+    line-height: 1.6;
+}
+
+.footer-contact-info p {
+    margin-bottom: 12px;
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-start;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom-text {
+    font-size: 16px;
+    color: #6c7278;
+}
+
+.footer-credit {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s ease;
+}
+
+.footer-credit:hover {
+    color: var(--accent);
+}
+
+/* --- TABLET --- */
+@media (max-width: 1024px) {
+    :root {
+        --nav-height: 116px;
+    }
+
+    .footer-logo-img {
+        height: 112px;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        min-width: 56px;
+        min-height: 56px;
+    }
+
+    .mobile-menu-btn svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .nav-links {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: min(320px, 85vw);
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        background-color: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-left: 1px solid var(--border-subtle);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1.6rem;
+        padding: calc(var(--nav-height) + 1.5rem) 1.5rem 2.5rem 1.5rem;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+        z-index: 1050;
+        /* Keeps the closed drawer out of the tab order. Without this a keyboard
+           user tabs through five links that are off-screen and invisible. */
+        visibility: hidden;
+    }
+
+    .nav-links.active {
+        right: 0;
+        visibility: visible;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        font-size: 1.15rem;
+        display: block;
+        padding: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .nav-cta {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        padding: 0.9rem 1.5rem !important;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+    :root {
+        --nav-height: 100px;
+    }
+
+    h2 {
+        font-size: 2.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-logo-img {
+        height: 94px;
+    }
+
+    .footer-grid {
+        gap: 30px;
+        text-align: center;
+    }
+
+    /* The whole footer centres on mobile, so undo the desktop left-alignment. */
+    .footer-logo,
+    .footer-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer-column-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-contact-info {
+        text-align: center;
+    }
+
+    .footer-contact-item {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+/* --- SMALL MOBILE --- */
+@media (max-width: 480px) {
+    :root {
+        --nav-height: 88px;
+    }
+
+    .footer-description {
+        font-size: 1.15rem;
+    }
+
+    .footer-column-title {
+        font-size: 1.45rem;
+    }
+
+    .nav-links a {
+        font-size: 1.05rem;
+        padding: 0.6rem;
+    }
+
+    .cta-box {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .cta-box h3 {
+        font-size: 1.6rem;
+    }
+
+    .cta-box .btn {
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+        width: 100%;
+    }
+}
+
+/* --- ACCESSIBILITY: Reduced Motion --- */
+/* JS-driven motion (counters, the globe) is gated separately in motion.js — CSS
+   alone cannot reach a requestAnimationFrame loop. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .js .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "metalmarvel-website",
+  "version": "1.0.0",
+  "description": "Metal Marvel Oy website",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js"
+  }
+}
