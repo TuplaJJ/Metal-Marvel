@@ -210,15 +210,17 @@
 
 .about-content {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: clamp(2.5rem, 5vw, 5rem);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 3.5vw, 3.5rem);
     align-items: center;
-    max-width: 1400px;
+    max-width: 1350px;
     margin: 0 auto;
 }
 
 .about-text {
     text-align: left;
+    width: 100%;
+    max-width: 620px;
 }
 
 .about-text h2 {
@@ -228,7 +230,6 @@
 .about-text p {
     font-size: 1.3125rem;
     line-height: 1.8;
-    max-width: 600px;
 }
 
 .about-stats {
@@ -280,8 +281,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
     background: transparent;
     border: none;
     padding: 0;
@@ -291,16 +291,16 @@
 
 .about-logo-img {
     width: 100%;
-    max-width: 900px;
+    max-width: 640px;
     height: auto;
     object-fit: contain;
     mix-blend-mode: screen;
     background: transparent;
     filter: contrast(1.08) brightness(1.08);
-    transform: translateX(-30%) scale(1.32);
-    transform-origin: center center;
+    transform: scale(1.35);
+    transform-origin: left center;
     display: block;
-    margin: 0 auto;
+    margin: 0;
 }
 
 /* --- LUPAUKSEMME --- */
