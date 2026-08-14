@@ -279,6 +279,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     background: transparent;
     border: none;
     padding: 0;
@@ -288,14 +289,16 @@
 
 .about-logo-img {
     width: 100%;
-    max-width: 820px;
+    max-width: 900px;
     height: auto;
     object-fit: contain;
     mix-blend-mode: screen;
     background: transparent;
     filter: contrast(1.08) brightness(1.08);
-    transform: scale(1.15);
+    transform: scale(1.65);
     transform-origin: center center;
+    display: block;
+    margin: 0 auto;
 }
 
 /* --- LUPAUKSEMME --- */
