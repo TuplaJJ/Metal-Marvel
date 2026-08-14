@@ -26,8 +26,11 @@ export function initSectionTracking(routes) {
     trackPageview(initialPath);
 
     // If landing directly on a clean section route (e.g. /meista, /palvelut, /yhteystiedot),
-    // smooth scroll to the target section after DOM is ready
-    const landingRoute = routes.find((r) => r.path === initialPath && r.id);
+    // smooth scroll to the target section after DOM is ready. A URL that already
+    // carries a hash (e.g. index.html#meista, used by the nav and footer links)
+    // has its own scroll target and must be left alone — otherwise every hash
+    // link would match the '/' route and get dragged back to the hero section.
+    const landingRoute = !window.location.hash && routes.find((r) => r.path === initialPath && r.id);
     if (landingRoute) {
         window.addEventListener('DOMContentLoaded', () => {
             const target = document.getElementById(landingRoute.id);
