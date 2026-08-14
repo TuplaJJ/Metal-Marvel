@@ -9,7 +9,9 @@ const path = require('path');
 
 const START_PORT = Number(process.env.PORT) || 3000;
 const MAX_PORT_ATTEMPTS = 10;
-const PUBLIC_DIR = __dirname;
+const PUBLIC_DIR = fs.existsSync(path.join(__dirname, 'metalmarvel-website'))
+  ? path.join(__dirname, 'metalmarvel-website')
+  : __dirname;
 
 const BLOCKED_FILES = new Set([
   'server.js',
