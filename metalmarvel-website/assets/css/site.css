@@ -203,14 +203,24 @@ nav {
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
+/* Order matters here. A transform list acts on the geometry right-to-left, so
+   rotate() translateY() slides the stroke onto the viewBox centre line
+   (y 6 -> 12, y 18 -> 12) and only then spins it about that centre, leaving
+   both strokes crossing at 12,12 with four equal arms.
+
+   Written the other way round the rotation happened first and the 6px shift
+   then moved the finished stroke down the screen, along its own diagonal. The
+   two strokes ended up crossing at x 14.5 instead of 12 — an X sitting 5.7px
+   right of centre whose upper-left and lower-left arms were half the length of
+   the right-hand ones, so the left half of the X looked shorn off. */
 .mobile-menu-btn[aria-expanded="true"] svg line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+    transform: rotate(45deg) translateY(6px);
 }
 .mobile-menu-btn[aria-expanded="true"] svg line:nth-child(2) {
     opacity: 0;
 }
 .mobile-menu-btn[aria-expanded="true"] svg line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: rotate(-45deg) translateY(-6px);
 }
 
 body.no-scroll {
