@@ -142,9 +142,12 @@ function handleRequest(req, res) {
     reqPath = '/index.html';
   }
 
+  /* Blocked paths answer 404, not 403: a distinct "forbidden" reply would confirm
+     that server.js, vercel.json, .git and friends exist, letting someone map the
+     project layout by probing. Missing and off-limits look identical. */
   const filePath = resolveWithinPublicDir(reqPath);
   if (!filePath) {
-    return send(res, 403, '<h1>403 Forbidden</h1>');
+    return send(res, 404, '<h1>404 Not Found</h1>');
   }
 
   fs.stat(filePath, (err, stats) => {
@@ -191,7 +194,9 @@ function createServer(port, attempt = 1) {
       );
       process.exitCode = 1;
     } else {
-      console.error(err);
+      /* Code only — the full error object carries a stack trace and absolute
+         filesystem paths, which do not belong in terminal output or CI logs. */
+      console.error(`Server failed to start (${err.code || 'unknown error'}).`);
       process.exitCode = 1;
     }
   });
