@@ -423,16 +423,14 @@ footer.site-footer {
     color: var(--accent);
 }
 
-/* --- TABLET --- */
-@media (max-width: 1024px) {
-    :root {
-        --nav-height: 116px;
-    }
-
-    .footer-logo-img {
-        height: 112px;
-    }
-
+/* --- NAV DRAWER ---
+   Kept on its own breakpoint rather than folded into the tablet block below.
+   The horizontal bar needs ~1186px to lay out (295px logo + 771px of links,
+   inside nav's 5% side padding). It used to stay horizontal down to 1024px, so
+   everything from 1025-1185px overflowed and body's overflow-x: hidden clipped
+   the tail off in silence — at 1025px the EN toggle was cut off completely.
+   Hand over to the drawer while the bar still fits, with margin to spare. */
+@media (max-width: 1200px) {
     .mobile-menu-btn {
         display: flex;
         min-width: 56px;
@@ -493,6 +491,17 @@ footer.site-footer {
         text-align: center;
         box-sizing: border-box;
         padding: 0.9rem 1.5rem !important;
+    }
+}
+
+/* --- TABLET --- */
+@media (max-width: 1024px) {
+    :root {
+        --nav-height: 116px;
+    }
+
+    .footer-logo-img {
+        height: 112px;
     }
 
     .footer-grid {
