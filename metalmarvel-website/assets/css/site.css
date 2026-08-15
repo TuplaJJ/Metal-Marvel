@@ -185,6 +185,10 @@ nav {
     min-height: 48px;
     align-items: center;
     justify-content: center;
+    /* z-index is a no-op without a position — without this, the open drawer's
+       backdrop-filter layer (its own stacking context) could paint over part of
+       this button on iOS Safari, clipping the left side of the close (X) icon. */
+    position: relative;
     z-index: 1100;
     transition: var(--transition-fast);
     touch-action: manipulation;
