@@ -3,6 +3,7 @@
 import { initI18n } from './i18n.js';
 import { initNav, initReveal } from './ui.js';
 import { initGlobe } from './globe.js';
+import { initPrivacyPanel } from './privacy.js';
 import { initSectionTracking } from './analytics.js';
 
 const strings = {
@@ -19,12 +20,16 @@ const strings = {
         valvonta_hero_title: 'INSTALLATION & SITE MANAGEMENT',
         valvonta_hero_desc: 'We provide installation supervision, site management, and project coordination for mechanical installations, maintenance, and project delivery. In addition, we handle welding quality assurance and all documentation required by the project.<br><br>Our site supervisors have completed basic HSE training, and safe working practices are an integral part of every project we deliver.',
         valvonta_content_title: 'SUPERVISION WORK FROM OSTROBOTHNIA TO SITES AROUND THE WORLD',
-        valvonta_p1: 'Metal Marvel Oy specialises in the supervision of installation and welding work, as well as in welding quality control. Our service area covers Vaasa, Alajärvi, Kauhava, Seinäjoki, Kurikka, Ähtäri, Alavus, Lapua, Pietarsaari, Uusikaarlepyy, Kristiinankaupunki, and Kaskinen, as well as the whole of Finland and sites abroad. We have carried out projects in the following countries: Argentina, the Bahamas, Barbados, Denmark, El Salvador, England, France, Germany, Ireland, Italy, Mexico, Mozambique, the Netherlands, Nigeria, Norway, Panama, Russia, South Africa, Sweden, Togo, and the United Arab Emirates.',
+        valvonta_p1: 'Metal Marvel Oy as a company specialises in the supervision and installation of welding work and quality control. Our service area covers Vaasa, Alajärvi, Kauhava, Seinäjoki, Kurikka, Ähtäri, Alavus, Lapua, Pietarsaari, Uusikaarlepyy, Kristiinankaupunki, and Kaskinen, as well as the whole of Finland and sites abroad. We have carried out projects in the following countries: Argentina, the Bahamas, Barbados, Denmark, El Salvador, England, France, Germany, Ireland, Italy, Mexico, Mozambique, the Netherlands, Nigeria, Norway, Panama, Russia, South Africa, Sweden, Togo, and the United Arab Emirates.',
         valvonta_cta_title: 'Need supervision for your project?',
         valvonta_cta_desc: 'Our services are always tailored to customer needs. Please get in touch – we will help you find a solution that works for your project.',
         services_cta_button: 'Request more information'
     }
 };
+
+/* Before initI18n: the panel brings [data-key] nodes of its own, and i18n only
+   translates what is in the DOM at the moment it runs. */
+initPrivacyPanel();
 
 initI18n({
     strings,

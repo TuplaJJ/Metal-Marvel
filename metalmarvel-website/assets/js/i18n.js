@@ -4,6 +4,8 @@
    without this, clicking through to another page silently reverted the visitor
    to Finnish. */
 
+import { privacyDocument } from './privacy-content.js';
+
 const STORAGE_KEY = 'mm-lang';
 const LANGS = ['fi', 'en'];
 
@@ -21,7 +23,12 @@ const COMMON = {
         footer_col3_title: 'YHTEYSTIEDOT',
         footer_copy: '© 2026 Metal Marvel Oy. Kaikki oikeudet pidätetään.',
         footer_y_tunnus: 'Y-tunnus: 3417840-5',
-        footer_address: 'Tampereentie 2575, 66470 JUKAJA'
+        footer_address: 'Tampereentie 2575, 66470 JUKAJA',
+        footer_privacy: 'TIETOSUOJASELOSTE',
+        privacy_title: 'TIETOSUOJASELOSTE',
+        /* The full statement, swapped by the same toggle as everything else.
+           Authored in privacy-content.js, which is why it is safe as innerHTML. */
+        privacy_body: privacyDocument.fi
     },
     en: {
         nav_home: 'HOME',
@@ -34,7 +41,10 @@ const COMMON = {
         footer_col3_title: 'CONTACT INFO',
         footer_copy: '© 2026 Metal Marvel Oy. All rights reserved.',
         footer_y_tunnus: 'Business ID: 3417840-5',
-        footer_address: 'Tampereentie 2575, 66470 JUKAJA, Finland'
+        footer_address: 'Tampereentie 2575, 66470 JUKAJA, Finland',
+        footer_privacy: 'PRIVACY POLICY',
+        privacy_title: 'PRIVACY POLICY',
+        privacy_body: privacyDocument.en
     }
 };
 

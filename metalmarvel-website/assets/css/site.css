@@ -433,6 +433,232 @@ footer.site-footer {
     color: var(--accent);
 }
 
+/* --- TIETOSUOJASELOSTE PANEL --- */
+.footer-privacy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    color: #d1d5db;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 0.7rem 1.3rem;
+    min-height: 44px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    touch-action: manipulation;
+}
+
+.footer-privacy-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.footer-privacy-btn svg {
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+}
+
+.footer-privacy-btn[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+/* Opened with showModal(), so the panel lives in the top layer — no z-index of
+   its own is needed to clear the fixed nav (1000) or the drawer (1050). */
+.privacy-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 88vh;
+    max-height: 88dvh;
+    padding: 0;
+    border: none;
+    border-bottom: 2px solid var(--accent);
+    border-radius: 0 0 8px 8px;
+    background: var(--bg-card);
+    color: var(--text-main);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+    flex-direction: column;
+    transform: translateY(-100%);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* [open] is where the UA switches `display` on, so the flex layout that splits
+   the fixed header from the scrolling body has to be declared against it. */
+.privacy-dialog[open] {
+    display: flex;
+}
+
+.privacy-dialog.active {
+    transform: translateY(0);
+}
+
+/* ::backdrop does not inherit the page's custom properties in every engine, so
+   these two rules are written out in full rather than via --bg-primary. */
+.privacy-dialog::backdrop {
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.privacy-dialog.active::backdrop {
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.privacy-head {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.35rem clamp(1.25rem, 5vw, 3rem);
+    background: #050505;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.privacy-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2.6vw, 1.6rem);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.privacy-close {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    touch-action: manipulation;
+}
+
+.privacy-close:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.privacy-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Keeps a flick at the end of the document from scrolling the page behind. */
+    overscroll-behavior: contain;
+    padding: 2rem clamp(1.25rem, 5vw, 3rem) 3rem;
+}
+
+.privacy-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* The document runs to fifteen numbered sections, so the headings use the body
+   face rather than the display font the rest of the site gives h3/h4 — a page of
+   uppercase Audiowide subheads is unreadable at this length. */
+.privacy-content h3 {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: none;
+    letter-spacing: 0.3px;
+    margin: 2.4rem 0 0.9rem;
+}
+
+.privacy-content h4 {
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-transform: none;
+    letter-spacing: 0.2px;
+    margin: 1.6rem 0 0.6rem;
+}
+
+.privacy-content p {
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.05rem;
+}
+
+/* site.css resets ul to list-style: none for the nav and footer lists. */
+.privacy-content ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 0 0 1.4rem;
+}
+
+.privacy-content li {
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+}
+
+.privacy-content a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+}
+
+.privacy-content a:hover {
+    color: var(--text-main);
+}
+
+.privacy-meta {
+    padding-bottom: 1.4rem;
+    margin-bottom: 1.6rem;
+    border-bottom: 1px solid var(--border-subtle);
+    font-weight: 600;
+    color: var(--text-main) !important;
+}
+
+/* Closing identification block. Mirrors .privacy-meta at the head of the
+   document, with the rule above it rather than below. */
+.privacy-signoff {
+    padding-top: 1.6rem;
+    margin-top: 2.6rem;
+    border-top: 1px solid var(--border-subtle);
+    font-weight: 600;
+    color: var(--text-main) !important;
+}
+
+@media (max-width: 768px) {
+    .privacy-head {
+        padding: 1.1rem 1.25rem;
+    }
+
+    .privacy-body {
+        padding: 1.5rem 1.25rem 2.5rem;
+    }
+
+    .privacy-content h3 {
+        font-size: 1.08rem;
+        margin-top: 2rem;
+    }
+}
+
 /* --- NAV DRAWER ---
    Kept on its own breakpoint rather than folded into the tablet block below.
    The horizontal bar needs ~1186px to lay out (295px logo + 771px of links,

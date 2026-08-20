@@ -2,6 +2,7 @@
 
 import { initI18n } from './i18n.js';
 import { initNav, initReveal, reducedMotion } from './ui.js';
+import { initPrivacyPanel } from './privacy.js';
 import { initSectionTracking } from './analytics.js';
 
 const strings = {
@@ -64,7 +65,7 @@ const strings = {
         service1_title: 'Piping Installations',
         service1_desc: 'We carry out piping installations in a wide range of process, production, and work environments, covering carbon steel, stainless and acid-resistant grades, and duplex piping.',
         service2_title: 'Steel Structures',
-        service2_desc: 'We fabricate, install, and modify steel structures, and carry out repair, maintenance, and alteration work according to customer needs.',
+        service2_desc: 'We fabricate, install, and modify steel structures, and carry out repairs, maintenance, and alteration work according to the customer’s needs.',
         service3_title: 'Equipment Installations',
         service3_desc: 'We install machinery, equipment, and production lines carefully and safely through to commissioning.',
         service4_title: 'Maintenance',
@@ -72,7 +73,7 @@ const strings = {
         service5_title: 'Resource Services',
         service5_desc: 'We provide experienced metalworking and industrial professionals on an hourly or project basis. Our resourcing scales from individual specialists to complete work crews.',
         service6_title: 'Installation and Site Management',
-        service6_desc: 'We take charge of site management, supervision, and project coordination to ensure execution runs smoothly.',
+        service6_desc: 'We take charge of site management, supervision, and project coordination to ensure smooth and efficient execution of each project.',
         service7_title: 'Project Services',
         service7_desc: 'We support project planning, coordination, and execution, ensuring high quality and reliable schedule management.',
         service8_title: 'Metal Product Manufacturing',
@@ -82,7 +83,7 @@ const strings = {
         services_cta_button: 'Request more information',
         card_cta: 'Request a quote',
         about_title: 'ABOUT US',
-        about_desc: 'We are two brothers from Ostrobothnia who run the company together. Across more than 30 years we have built broad experience in structural steel engineering – from shipyards and bridge projects to industrial maintenance, demanding process piping welding in the oil industry, and hydro, steam, and engine power plants around the world. We work in the most demanding conditions and meet our customers’ quality requirements without ever compromising on safety.',
+        about_desc: 'We are two brothers from Ostrobothnia who run the company together. Working together over 30 years, we have gained experience in structural steel engineering – from shipyards and bridge projects to industrial maintenance, demanding process piping welding in the oil industry, and hydro, steam, and engine power plants around the world. We work in the most demanding conditions and meet our customers’ quality requirements without compromising on safety.',
         about_stat1_label: 'Years of experience',
         about_stat2_label: 'Countries served',
         about_stat3_label: 'Installation hours completed',
@@ -104,6 +105,10 @@ const strings = {
         social_title: 'Follow us on social media'
     }
 };
+
+/* Before initI18n: the panel brings [data-key] nodes of its own, and i18n only
+   translates what is in the DOM at the moment it runs. */
+initPrivacyPanel();
 
 initI18n({
     strings,
