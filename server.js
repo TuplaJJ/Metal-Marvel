@@ -1,7 +1,11 @@
-/* Local development server for the static site.
-   Not used in production — the site is deployed as static files behind a CDN,
-   where the headers in vercel.json apply. The same headers are mirrored here so
-   that what you test locally matches what ships. */
+/* HTTP server for the site. Serves local development AND production.
+
+   This is NOT a dev-only script. Vercel builds the project with framework
+   "node" and reports "Using server.js as the root entrypoint", so production
+   requests are answered by this file rather than by static files behind a CDN.
+   The headers below are consequently the ones that ship: a header changed only
+   in vercel.json never reaches production, because the response is written
+   here. Keep the two files in step, and treat this list as authoritative. */
 
 const http = require('http');
 const fs = require('fs');
@@ -61,7 +65,15 @@ const SECURITY_HEADERS = {
     "base-uri 'self'",
     "form-action 'none'",
     "frame-ancestors 'none'",
-    "connect-src 'self'"
+    "connect-src 'self'",
+    /* Present in vercel.json but previously missing here, so production — which
+       is served from this file — shipped a CSP two directives short of the
+       documented one. Harmless in practice (the site loads no http:// resource
+       and HSTS is preloaded), but the two must agree to stay auditable.
+       Neither affects local development: both exempt localhost, which browsers
+       already treat as a trustworthy origin. */
+    'upgrade-insecure-requests',
+    'block-all-mixed-content'
   ].join('; '),
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
