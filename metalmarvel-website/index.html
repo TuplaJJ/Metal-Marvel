@@ -458,10 +458,14 @@
 
     <script type="module" src="assets/js/index.js"></script>
 
-    <!-- Vercel Web Analytics -->
+    <!-- Vercel Web Analytics.
+         Auto-tracking is off on purpose: analytics.js sends the landing pageview
+         itself, so leaving it on reported every visit twice and pinned the
+         bounce rate at 0% (no session could ever have just one pageview).
+         Every pageview now goes through trackPageview() and nowhere else. -->
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
-    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/insights/script.js" data-disable-auto-track="1"></script>
 </body>
 </html>
