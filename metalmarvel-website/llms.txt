@@ -5,7 +5,7 @@
 ## Pääpalvelut
 
 - [Etusivu ja palvelut](https://www.metalmarvel.fi/): Teollisuuden putkistoasennukset, teräsrakenteet, kone- ja laiteasennukset, kunnossapito, resurssipalvelut ja metallituotteiden valmistus.
-- [Asennus- ja työnjohto (Valvonta)](https://www.metalmarvel.fi/valvonta.html): Mekaanisten asennusten työnjohto, työmaavalvonta, hitsauksen laadunvarmistus ja projektikoordinointi Suomessa ja yli 20 maassa maailmanlaajuisesti.
+- [Asennus- ja työnjohto (Valvonta)](https://www.metalmarvel.fi/valvonta): Mekaanisten asennusten työnjohto, työmaavalvonta, hitsauksen laadunvarmistus ja projektikoordinointi Suomessa ja yli 20 maassa maailmanlaajuisesti.
 
 ## Yhteystiedot & Yritystiedot
 
